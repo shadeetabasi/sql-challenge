@@ -3,7 +3,6 @@ SELECT employees.emp_no, last_name, first_name, sex
 FROM employees
 LEFT JOIN salaries
 ON employees.emp_no = salaries.emp_no
--- ORDER BY emp_no;
 
 -- List employees who were hired in 1986.
 SELECT emp_no, last_name, first_name, hire_date
@@ -43,6 +42,16 @@ ON departments.dept_no = department_employees.dept_no
 WHERE dept_name = 'Sales'
 
 -- List all employees in the Sales and Development departments, including their employee number, last name, first name, and department name.
-SELECT employees.
+SELECT employees.emp_no, employees.last_name, employees.first_name, departments.dept_name
+FROM employees
+LEFT JOIN department_employees
+ON department_employees.emp_no = employees.emp_no
+LEFT JOIN departments
+ON departments.dept_no = department_employees.dept_no
+WHERE dept_name = 'Sales' OR dept_name = 'Development'
 
 -- In descending order, list the frequency count of employee last names, i.e., how many employees share each last name.
+SELECT employees.last_name, COUNT(employees.last_name)
+FROM employees
+GROUP BY employees.last_name
+ORDER BY COUNT(employees.last_name) desc;
