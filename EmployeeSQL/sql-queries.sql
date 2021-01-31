@@ -28,12 +28,21 @@ INNER JOIN departments
 ON departments.dept_no = dept_manager.dept_no
 
 -- List first name, last name, and sex for employees whose first name is "Hercules" and last names begin with "B."
-
+SELECT employees.first_name, employees.last_name, employees.sex
+FROM employees
+WHERE first_name = 'Hercules'
+AND last_name LIKE 'B%'
 
 -- List all employees in the Sales department, including their employee number, last name, first name, and department name.
-
+SELECT employees.emp_no, employees.last_name, employees.first_name, departments.dept_name
+FROM employees
+LEFT JOIN department_employees
+ON department_employees.emp_no = employees.emp_no
+LEFT JOIN departments
+ON departments.dept_no = department_employees.dept_no
+WHERE dept_name = 'Sales'
 
 -- List all employees in the Sales and Development departments, including their employee number, last name, first name, and department name.
-
+SELECT employees.
 
 -- In descending order, list the frequency count of employee last names, i.e., how many employees share each last name.
